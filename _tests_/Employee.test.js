@@ -20,7 +20,7 @@ test("Set ID via constructor argument", () => {
 });
 
 test("Set Email via constructor argument", () => {
-    const testValue = "email@email.com";
+    const testValue = "email@fakemail.com";
     const emp = new Employee("Cole", 1, testValue);
     expect(emp.email).toBe(testValue);
 });
@@ -38,13 +38,13 @@ test("Get ID via getId()", () => {
 });
 
 test("Get Email via getEmail()", () => {
-    const testValue = "email@email.com";
+    const testValue = "email@fakemail.com";
     const emp = new Employee("Cole", 1, testValue);
     expect(emp.getEmail()).toBe(testValue);
 });
 
 test("getRole() function should return 'Employee'", () => {
     const testValue = "Employee";
-    const emp = new Employee("Kenneth", 1, "email@email.com");
+    const emp = new Employee("Kenneth", 1, "email@fakemail.com");
     expect(emp.getRole()).toBe(testValue);
 });
