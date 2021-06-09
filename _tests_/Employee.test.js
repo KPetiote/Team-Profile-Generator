@@ -32,7 +32,7 @@ test("Get name via getName()", () => {
 });
 
 test("Get ID via getId()", () => {
-    const testValue = 61;
+    const testValue = 83;
     const emp = new Employee("Cole", testValue);
     expect(emp.getId()).toBe(testValue);
 });
@@ -43,7 +43,7 @@ test("Get Email via getEmail()", () => {
     expect(emp.getEmail()).toBe(testValue);
 });
 
-test("getRole() functions correctly", () => {
+test("getRole() function should return 'Employee'", () => {
     const testValue = "Employee";
     const emp = new Employee("Kenneth", 1, "email@email.com");
     expect(emp.getRole()).toBe(testValue);

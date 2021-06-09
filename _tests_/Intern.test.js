@@ -8,7 +8,7 @@ test("Set School via the constructor argument", () => {
     expect(emp.school).toBe(testValue);
 });
 
-test("getRole() functions correctly", () => {
+test("getRole() function should return 'Intern'", () => {
     const testValue = "Intern";
     const emp = new Intern("Charles", 1, "email@email.com", "Rutgers");
     expect(emp.getRole()).toBe(testValue);
