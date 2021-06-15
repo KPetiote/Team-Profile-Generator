@@ -3,7 +3,7 @@
 
 const inquirer = require("inquirer");
 const fs = require("fs");
-const style = require("./dist/style");
+const path = require("path");
 
 // Gets the required js class files
 const Employee = require("./lib/Employee");
@@ -13,6 +13,21 @@ const Manager = require("./lib/Manager");
 
 // Empty Array for team members
 const teamMembers = [];
+const canAddManager = true;
+
+// Variable to select the new member
+const selectRoleType = [
+    {
+        type: "list",
+        name: "roleType",
+        message: "Please choose the role for the employee",
+        choices: ["Manager", "Engineer", "Intern"],
+    }
+];
+
+// Output location
+const outputDirectory = path.resolve(__dirname, "src");
+const outputPath = path.join(outputDirectory, "teamProfile.html");
 
 // ARRAY OF QUESTIONS
 // ---------------------------------------------------------------------------
@@ -183,3 +198,90 @@ const questions = {
         }
     ]
 };
+
+// FUNCTIONS
+// ---------------------------------------------------------------------------
+
+function addNewMember() {
+    inquirer.prompt(selectRoleType)
+        .then(answer => {
+            // console.log(answer.roleType);
+
+            if (answer.roleType === "Manager") {
+                if (canAddManager) {
+                    inquirer.prompt(questions.Manager)
+                        .then(answer => {
+                            //save employee info
+                            const manager = new Manager
+                                (
+                                    answer.name,
+                                    answer.id,
+                                    answer.email,
+                                    answer.officeNumber
+                                );
+
+                            //add info to team array if manager doesn't exist
+                            teamMembers.push(manager);
+                            canAddManager = false;
+                            if (answer.addNew === "yes") {
+                                addNewMember();
+                            } else {
+                                generate();
+                            }
+                        });
+                } else {
+                    //only 1 manager
+                    console.log("There is a manager already!")
+                    addNewMember();
+                }
+
+            } else if (answer.roleType === "Engineer") {
+                inquirer.prompt(questions.Engineer)
+                    .then(answer => {
+                        //save ee info
+                        const engineer = new Engineer
+                            (
+                                answer.name,
+                                answer.id,
+                                answer.email,
+                                answer.github
+                            );
+                        //add info to team array
+                        teamMembers.push(engineer);
+                        if (answer.addNew === "yes") {
+                            addNewMember();
+                        } else {
+                            generate();
+                        };
+                    });
+
+            } else if (answer.roleType === "Intern") {
+                inquirer.prompt(questions.Intern)
+                    .then(answer => {
+                        //save ee info
+                        const intern = new Intern
+                            (
+                                answer.name,
+                                answer.id,
+                                answer.email,
+                                answer.school
+                            );
+                        //add info to team array
+                        teamMembers.push(intern);
+                        if (answer.addNew === "yes") {
+                            addNewMember();
+                        } else {
+                            generate();
+                        };
+                    });
+            };
+        });
+};
+
+addNewMember();
+
+// Function to generate output file
+function generate() {
+    fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
+    process.exit(0);
+}
