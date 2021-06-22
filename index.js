@@ -4,6 +4,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
+const emailValidator = require('email-validator');
 
 // Gets the required js class files
 const Employee = require("./lib/Employee");
@@ -12,8 +13,8 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
 // Empty Array for team members
-const teamMembers = [];
-const canAddManager = true;
+let teamMembers = [];
+let canAddManager = true;
 
 // Variable to select the new member
 const selectRoleType = [
@@ -26,7 +27,8 @@ const selectRoleType = [
 ];
 
 // Output location
-const outputDirectory = path.resolve(__dirname, "src");
+const render = require("./lib/GenerateHTML");
+const outputDirectory = path.resolve(__dirname, "dist");
 const outputPath = path.join(outputDirectory, "teamProfile.html");
 
 // ARRAY OF QUESTIONS
@@ -84,7 +86,7 @@ const questions = {
             type: "list",
             name: "addNew",
             message: "Do you want to add another employee?",
-            choices: ["Yes", "No"]
+            choices: ["yes", "no"]
         }
     ],
 
@@ -101,7 +103,7 @@ const questions = {
                 } else { return "Please enter engineer's name." }
             },
         },
-        // Enginner's ID
+        // Engineer's ID
         {
             type: "input",
             name: "engineerId",
@@ -112,7 +114,7 @@ const questions = {
                 } else { return "Please enter engineer's id." }
             },
         },
-        // Enginner's Email
+        // Engineer's Email
         {
             type: "input",
             name: "engineerEmail",
@@ -123,7 +125,7 @@ const questions = {
                 } else { return 'Please enter a valid email address.' }
             },
         },
-        // Enginner's GitHub
+        // Engineer's GitHub
         {
             type: "input",
             name: "gitHub",
@@ -139,7 +141,7 @@ const questions = {
             type: "list",
             name: "addNew",
             message: "Do you want to add another employee",
-            choices: ["Yes", "No"]
+            choices: ["yes", "no"]
         }
     ],
 
@@ -194,7 +196,7 @@ const questions = {
             type: "list",
             name: "addNew",
             message: "Do you want to add another employee?",
-            choices: ["Yes", "No"]
+            choices: ["yes", "no"]
         }
     ]
 };
@@ -206,7 +208,6 @@ function addNewMember() {
     inquirer.prompt(selectRoleType)
         .then(answer => {
             // console.log(answer.roleType);
-
             if (answer.roleType === "Manager") {
                 if (canAddManager) {
                     inquirer.prompt(questions.Manager)
@@ -214,12 +215,12 @@ function addNewMember() {
                             //save employee info
                             const manager = new Manager
                                 (
-                                    answer.name,
-                                    answer.id,
-                                    answer.email,
+                                    answer.managerName,
+                                    answer.managerId,
+                                    answer.managerEmail,
                                     answer.officeNumber
                                 );
-
+                                console.log(manager)
                             //add info to team array if manager doesn't exist
                             teamMembers.push(manager);
                             canAddManager = false;
@@ -234,17 +235,16 @@ function addNewMember() {
                     console.log("There is a manager already!")
                     addNewMember();
                 }
-
             } else if (answer.roleType === "Engineer") {
                 inquirer.prompt(questions.Engineer)
                     .then(answer => {
                         //save ee info
                         const engineer = new Engineer
                             (
-                                answer.name,
-                                answer.id,
-                                answer.email,
-                                answer.github
+                                answer.engineerName,
+                                answer.engineerId,
+                                answer.engineerEmail,
+                                answer.gitHub
                             );
                         //add info to team array
                         teamMembers.push(engineer);
@@ -254,17 +254,16 @@ function addNewMember() {
                             generate();
                         };
                     });
-
             } else if (answer.roleType === "Intern") {
                 inquirer.prompt(questions.Intern)
                     .then(answer => {
                         //save ee info
                         const intern = new Intern
                             (
-                                answer.name,
-                                answer.id,
-                                answer.email,
-                                answer.school
+                                answer.internName,
+                                answer.internId,
+                                answer.internEmail,
+                                answer.internSchool
                             );
                         //add info to team array
                         teamMembers.push(intern);
