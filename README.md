@@ -23,7 +23,7 @@ Upon first loading the program, the end-user is prompted to input information.\
 Once all the information has been filed out, an HTML file is generated for the user.
 
 ## Demo
-![Alt text](./assets/images/Team-Profile-Generator.gif "Team-Profile-Generator")
+![Alt text](./assets/images/Team-Profile-Generator.png "Team-Profile-Generator")
 
 ## Program Installation
 To use this program we will need to install Node.js\
