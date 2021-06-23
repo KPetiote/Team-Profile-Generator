@@ -52,6 +52,9 @@ npm run start
 The program will then initialize and function as shown in the demo.
 
 ## Technologies
+- BootStrap
+- CSS
+- HTML
 - Javascript
 - Node.js
 
