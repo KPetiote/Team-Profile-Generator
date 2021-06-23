@@ -54,6 +54,7 @@ The program will then initialize and function as shown in the demo.
 ## Technologies
 - BootStrap
 - CSS
+- Google Fonts
 - HTML
 - Javascript
 - Node.js
