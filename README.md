@@ -52,7 +52,7 @@ npm run start
 The program will then initialize and function as shown in the demo.
 
 ## Technologies
-- [BootStrap](https://getbootstrap.com/)
+- [BootStrap](https://getbootstrap.com/){:target="_blank"}
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Google Fonts](https://fonts.google.com/)
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
