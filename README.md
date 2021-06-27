@@ -52,12 +52,12 @@ npm run start
 The program will then initialize and function as shown in the demo.
 
 ## Technologies
-- BootStrap
-- CSS
-- Google Fonts
-- HTML
-- Javascript
-- Node.js
+- [BootStrap](https://getbootstrap.com/)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [Google Fonts](https://fonts.google.com/)
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [Javascript](https://www.javascript.com/)
+- [Node.js](https://nodejs.org/en/about/)
 
 ## Links
 - [Github Repository URL](https://github.com/Kpetiote/Team-Profile-Generator)
